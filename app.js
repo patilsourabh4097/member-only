@@ -58,16 +58,20 @@ passport.deserializeUser((id, done) => {
   })
 })
 
+// logger middleware
 app.use(logger('dev'));
+//body-parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+//cookie-parser middleware
 app.use(cookieParser());
 app.use(session({secret: 'cats', resave: false, saveUninitialized: true}))
+// passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(express.urlencoded({extended: false}))
 app.use(express.static(path.join(__dirname, 'public')));
-
+//index-router middleware
 app.use('/', indexRouter);
 
 
